@@ -556,10 +556,10 @@ sendButton.addEventListener('click', () => {
     messageElement.classList.add('message');
     const isCurrentUser = email === getCurrentUser();
 
-    const avatarCircle = document.createElement('div');
-    avatarCircle.classList.add('avatar-circle');
-    avatarCircle.textContent = username.slice(0, 2).toUpperCase();
-    messageElement.appendChild(avatarCircle);
+    // const avatarCircle = document.createElement('div');
+    // avatarCircle.classList.add('avatar-circle');
+    // avatarCircle.textContent = username.slice(0, 2).toUpperCase();
+    // messageElement.appendChild(avatarCircle);
 
     const messageContent = document.createElement('div');
     messageContent.classList.add('message-content');
@@ -579,9 +579,29 @@ sendButton.addEventListener('click', () => {
 
     messageElement.appendChild(messageContent);
 
+    // if (isCurrentUser) {
+    //   messageElement.classList.add('current-user');
+    // } else {
+    //   messageElement.classList.add('other-user');
+    // }
+
     if (isCurrentUser) {
+      messageElement.appendChild(messageContent);
+  
+      const avatarCircle = document.createElement('div');
+      avatarCircle.classList.add('avatar-circle');
+      avatarCircle.textContent = username.slice(0, 2).toUpperCase();
+      messageElement.appendChild(avatarCircle);
+      
       messageElement.classList.add('current-user');
     } else {
+      const avatarCircle = document.createElement('div');
+      avatarCircle.classList.add('avatar-circle');
+      avatarCircle.textContent = username.slice(0, 2).toUpperCase();
+      messageElement.appendChild(avatarCircle);
+  
+      messageElement.appendChild(messageContent);
+      
       messageElement.classList.add('other-user');
     }
 
