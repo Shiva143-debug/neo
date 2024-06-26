@@ -308,6 +308,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const messagesContainer = document.getElementById('messages');
   const registerBtn = document.getElementById('register-btn');
   const loginBtn = document.getElementById('login-btn');
+  const username =document.getElementById('register-username')
+  const email =document.getElementById('register-email')
+  const password =document.getElementById('register-password')
 
   let ws = null;
 initializeWebSocket();
@@ -330,8 +333,13 @@ initializeWebSocket();
     loginBtn.style.color = 'black';
     loginBtn.style.border='1px solid black'
     
-    registerForm.style.display = 'none'; 
-    loginForm.style.display = 'block';
+    registerForm.style.display = 'block'; 
+    loginForm.style.display = 'none';
+    username.value="";
+    email.value="";
+    password.value=""
+
+
   });
 
   loginBtn.addEventListener('click', function() {
