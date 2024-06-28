@@ -54,18 +54,39 @@ body {
   height: 80vh;
 }
 
-#chat-box {
+/* #chat-box {
   flex: 1;
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 10px;
+  height:100%;
   overflow-y: auto;
+  margin-bottom: 10px;
+  display: flex;
+  
+} */
+
+#chat-box {
+  display: flex;
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  overflow: hidden; /* Prevents overflow issues */
   margin-bottom: 10px;
 }
 
-#messages {
+/* #messages {
   display: flex;
   flex-direction: column;
+  width:70%
+} */
+
+#messages {
+  padding: 10px;
+  width: 70%;
+  overflow-y: auto; /* Enable scrolling for messages */
+  flex-shrink: 0; /* Prevent messages from shrinking */
 }
 
 .message {
@@ -162,4 +183,41 @@ body {
 
 .other-user .message-content {
   align-items: flex-start;
+}
+
+
+#user-boxes {
+  background-color: whitesmoke;
+  padding: 10px;
+  width: 30%;
+  overflow-y: auto; /* Enable scrolling for user boxes */
+  flex-shrink: 0; /* Prevent user-boxes from shrinking */
+  display: flex;
+  flex-direction: column;
+}
+
+.user-card {
+  background-color: #fcfdf8;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  color: rgb(3, 3, 3);
+  max-height: 200px; /* Limit maximum height of each card */
+  overflow: hidden; /* Hide overflow content */
+  flex-shrink: 0; /* Prevent user-cards from shrinking */
+}
+
+#user-boxes,
+#messages {
+  height: 100%; /* Occupy full height of chat-box */
+}
+
+/* Styling for messages and user boxes content */
+#messages,
+#user-boxes {
+  display: flex;
+  flex-direction: column;
+}
+.selected{
+  background-color: blue;
 }
