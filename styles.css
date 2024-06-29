@@ -283,6 +283,12 @@ body {
   width:95%;
   margin-bottom: 5px;
 }
+
+@media (max-widht:786px) {
+  #input-b{
+    height: 5%;
+  }
+}
 #e-name{
   height: 10%;
 }
