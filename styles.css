@@ -10,17 +10,28 @@ body {
 }
 
 .container {
-  width: 100%;
+  width: 100vw;
   /* max-width: 600px; */
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
   /* padding: 20px; */
 }
 
 #login-register {
   max-width: 600px;
+   margin-left: 300px;
 }
+
+
+/* #register-form-container{
+  margin-left: 200px;
+}
+
+#login-form-container{
+   margin-left: 200px;
+} */
 #login-register h2 {
   margin-top: 0;
 }
@@ -49,6 +60,14 @@ body {
 
 #login-register button:hover {
   background: #0056b3;
+}
+
+
+@media (max-width: 768px) {
+  #login-register {
+    max-width: 600px;
+    margin-left: 0; /* Adjust margin as per your design */
+  }
 }
 
 /* #chat-container {
@@ -281,14 +300,45 @@ body {
 #input-b{
   height: 10%;
   width:95%;
-  margin-bottom: 5px;
+ 
 }
 
-@media (max-widht:786px) {
+@media (max-width:786px) {
   #input-b{
-    height: 5%;
+    height: 10%;
   }
 }
 #e-name{
   height: 10%;
 }
+
+.avatar-circle {
+  width: 40px;
+  height: 40px;
+  background-color: #2196F3;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+/* @media (max-width:786px) {
+  #user-boxes{
+    width: 100vw;
+    border-radius: 8px;
+  }
+}
+@media (max-width:786px) {
+  #input-container{
+    display: none;
+  }
+  
+  #user-boxes{
+    display: block;
+  }
+} */
+
+
+
