@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const registerBtn = document.getElementById('register-btn');
   const loginBtn = document.getElementById('login-btn');
   const userBoxesContainer = document.getElementById('user-boxes');
+  const userSearchInput = document.getElementById('user-search');
   const usernameInput = document.getElementById('register-username');
   const emailInput = document.getElementById('register-email');
   const passwordInput = document.getElementById('register-password');
@@ -288,6 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Function to display a message in the chat window
   function displayMessage(username, message, timestamp, senderEmail) {
+    userSearchInput.style.display='none'
     const messageElement = document.createElement('div');
     messageElement.classList.add('message');
 
@@ -376,43 +378,147 @@ if (window.innerWidth <= 768 && !userCardClicked) {
 
 
 
+  // function displayUsers(username, email) {
+  //   const userCard = document.createElement('div');
+  //   userCard.classList.add('user-card');
+
+
+
+  //   function generateAvatar(username) {
+  //     const avatarCircle = document.createElement('div');
+  //     avatarCircle.classList.add('avatar-circle');
+  //     avatarCircle.textContent = username.slice(0, 1).toUpperCase(); // Use the first letter of the username
+  //     return avatarCircle;
+  //   }
+   
+  //   const avatar = generateAvatar(username);
+  //   userCard.appendChild(avatar);
+
+  //   userCard.textContent = username;
+  //   userCard.setAttribute('data-email', email); 
+
+  //   userCard.addEventListener('click', () => {
+  //     selectedUserEmail = email;
+
+  //     // Check if screen width is less than or equal to 768px (assuming this is your mobile breakpoint)
+  //     if (window.innerWidth <= 768 && userCardClicked) {
+  //       inputContainer.style.display = 'block';
+  //       userBoxesContainer.style.display='none';
+  //       inputContainer.style.width='100vw' // Show input container only on mobile
+  //       const avatar = generateAvatar(username);
+        
+  //       eNameElement.appendChild(avatar); // Append avatar first
+  //       eNameElement.appendChild(document.createTextNode(username));;
+  //     }
+  //     userCardClicked = true;
+  //     fetchAndDisplayMessages(selectedUserEmail, currentUserEmail);
+  //   });
+
+  //   userBoxesContainer.appendChild(userCard);
+  // }
   function displayUsers(username, email) {
+    // userBoxesContainer.appendChild(userSearchInput);
+     userSearchInput.style.display='block'
     const userCard = document.createElement('div');
     userCard.classList.add('user-card');
-    userCard.textContent = username;
-    userCard.setAttribute('data-email', email); // Store email as data attribute
-
-   
+  
+    // Function to generate an avatar
+    function generateAvatar(username) {
+      const avatarCircle = document.createElement('div');
+      avatarCircle.classList.add('avatar-circle');
+      avatarCircle.textContent = username.slice(0, 1).toUpperCase(); // Use the first letter of the username
+      return avatarCircle;
+    }
+  
+    // Generate the avatar and append it to the user card
+    const avatar = generateAvatar(username);
+    userCard.appendChild(avatar);
+  
+    // Create a div for the username text and append it to the user card
+    const usernameText = document.createElement('div');
+    usernameText.classList.add('username-text');
+    usernameText.textContent = username;
+    usernameText.style.paddingLeft="10px";
+    userCard.appendChild(usernameText);
+  
+    // Store email as data attribute
+    userCard.setAttribute('data-email', email);
+  
+    // Add click event listener to the user card
     userCard.addEventListener('click', () => {
       selectedUserEmail = email;
-      function generateAvatar(username) {
-        const avatarCircle = document.createElement('div');
-        avatarCircle.classList.add('avatar-circle');
-        avatarCircle.textContent = username.slice(0, 1).toUpperCase(); // Use the first letter of the username
-        return avatarCircle;
-      }
+  
       // Check if screen width is less than or equal to 768px (assuming this is your mobile breakpoint)
       if (window.innerWidth <= 768 && userCardClicked) {
         inputContainer.style.display = 'block';
-        userBoxesContainer.style.display='none';
-        inputContainer.style.width='100vw' // Show input container only on mobile
+        userBoxesContainer.style.display = 'none';
+        inputContainer.style.width = '100vw'; // Show input container only on mobile
+  
+        // Clear previous content in eNameElement
+        eNameElement.innerHTML = '';
+  
+        const avatarUsernameContainer = document.createElement('div');
+        avatarUsernameContainer.classList.add('avatar-username-container');
+    
+        // Append avatar and username to the container
         const avatar = generateAvatar(username);
-        
-        eNameElement.appendChild(avatar); // Append avatar first
-        eNameElement.appendChild(document.createTextNode(username));;
+        avatarUsernameContainer.appendChild(avatar); // Append avatar first
+        const usernameText = document.createElement('div');
+        usernameText.classList.add('username-text');
+        usernameText.textContent = username;
+        usernameText.style.paddingLeft="10px";
+        avatarUsernameContainer.appendChild(usernameText); // Append username text
+    
+        // Append the container to eNameElement
+        eNameElement.appendChild(avatarUsernameContainer);
       }
+  
       userCardClicked = true;
       fetchAndDisplayMessages(selectedUserEmail, currentUserEmail);
     });
 
+
+  
+    // Append the user card to the user boxes container
+   
     userBoxesContainer.appendChild(userCard);
   }
 
-  backButton.addEventListener('click',function(){
+  // userSearchInput.addEventListener('input', () => {
+  //   const searchTerm = userSearchInput.value.toLowerCase();
+  //   const userCards = userBoxesContainer.getElementsByClassName('user-card');
+  
+  //   Array.from(userCards).forEach(card => {
+  //     const username = card.getAttribute('username-text');
+  //     if (username.includes(searchTerm)) {
+  //       card.style.display = 'flex'; // or 'block' based on your design
+  //     } else {
+  //       card.style.display = 'none';
+  //     }
+  //   });
+  // });
 
+  userSearchInput.addEventListener('input', () => {
+    const searchTerm = userSearchInput.value.toLowerCase();
+    const userCards = userBoxesContainer.getElementsByClassName('user-card');
+  
+    Array.from(userCards).forEach(card => {
+      const username = card.getAttribute('data-username'); // Correct attribute name
+      if (username.includes(searchTerm)) {
+        card.style.display = 'flex'; // or 'block' based on your design
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+
+
+  backButton.addEventListener('click',function(){
+userSearchInput.style.display='block'
     inputContainer.style.display = 'none';
     userBoxesContainer.style.display='block' 
     userBoxesContainer.style.width='100vw'
+    eNameElement.textContent=""
     
   })
   function setCurrentUser(email) {
